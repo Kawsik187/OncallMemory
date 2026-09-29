@@ -1,0 +1,37 @@
+services:
+  hindsight:
+    image: ghcr.io/vectorize-io/hindsight:latest
+    container_name: hindsight
+    ports:
+      - "8888:8888"
+      - "9999:9999"
+    environment:
+      - HINDSIGHT_API_LLM_PROVIDER=${HINDSIGHT_API_LLM_PROVIDER:-mock}
+      - HINDSIGHT_API_LLM_API_KEY=${GROQ_API_KEY:-}
+    volumes:
+      - hindsight-data:/home/hindsight/.pg0
+    restart: unless-stopped
+
+  incident-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: incident-response-agent
+    ports:
+      - "8000:8000"
+    environment:
+      - HINDSIGHT_URL=http://hindsight:8888
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - LLM_MODEL=${LLM_MODEL:-openai/gpt-oss-120b}
+      - BANK_ID=${BANK_ID:-oncall-memory}
+      - HOST=0.0.0.0
+      - PORT=8000
+    env_file:
+      - .env
+    depends_on:
+      - hindsight
+    restart: unless-stopped
+
+volumes:
+  hindsight-data:
+    external: true

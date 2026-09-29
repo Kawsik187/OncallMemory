@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #060709;
+    color: #f1f5f9;
+  }
+  
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+
+/* Custom Cybernetic Red / Grey Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090b0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #272d38;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #dc2626;
+}
+
+/* Cybernetic Glowing Accents */
+.glow-red {
+  box-shadow: 0 0 25px -5px rgba(239, 35, 60, 0.35);
+}
+
+.glow-red-sm {
+  box-shadow: 0 0 15px -3px rgba(239, 35, 60, 0.25);
+}
+
+.glow-green {
+  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+}
